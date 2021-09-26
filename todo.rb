@@ -6,11 +6,11 @@ class Todo < ActiveRecord::Base
   end
 
   def overdue?
-    @due_date < Date.today
+    due_date < Date.today
   end
 
   def due_later?
-    @due_date > Date.today
+    due_date > Date.today
   end
 
   def to_displayable_string
@@ -25,8 +25,18 @@ class Todo < ActiveRecord::Base
   end
 
   def self.show_list
-    all.map {|todo| puts todo.to_displayable_string }
-    # Modify code here
+    puts("My Todo-list")
+    puts("\nOverdue")
+    list = all.filter {|todo| todo.overdue?}
+    list.map {|todo| puts todo.to_displayable_string }
+
+    puts("\nDue Today")
+    list = all.filter {|todo| todo.due_today?}
+    list.map {|todo| puts todo.to_displayable_string }
+
+    puts("\nDue Later")
+    list = all.filter {|todo| todo.due_later?}
+    list.map {|todo| puts todo.to_displayable_string }
   end
 
   def self.add_task
@@ -37,5 +47,4 @@ class Todo < ActiveRecord::Base
   def self.mark_as_complete(todo_id) # Hopefully it is self method?
     all completed = true
   end
-
 end
