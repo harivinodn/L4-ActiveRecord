@@ -43,7 +43,10 @@ class Todo < ActiveRecord::Base
     Todo.create!(todo_text: h[:todo_text], due_date: Date.today + h[:due_in_days], completed: false)
   end
 
-  def self.mark_as_complete(todo_id) # Hopefully it is self method?
-    all completed = true
+  def self.mark_as_complete(todo_id)
+    Todo.where(id: todo_id).each do  |q|
+      q.update(completed: true)
+    end
+    todo = Todo.where(:id => todo_id)
   end
 end
