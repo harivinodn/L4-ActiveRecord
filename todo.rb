@@ -39,9 +39,8 @@ class Todo < ActiveRecord::Base
     list.map {|todo| puts todo.to_displayable_string }
   end
 
-  def self.add_task
-    #Add code here
-    due_date = Date.today + due_in_days
+  def self.add_task(h)
+    Todo.create!(todo_text: h[:todo_text], due_date: Date.today + h[:due_in_days], completed: false)
   end
 
   def self.mark_as_complete(todo_id) # Hopefully it is self method?
