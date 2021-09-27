@@ -44,9 +44,11 @@ class Todo < ActiveRecord::Base
   end
 
   def self.mark_as_complete(todo_id)
-    Todo.where(id: todo_id).each do  |q|
-      q.update(completed: true)
-    end
-    todo = Todo.where(:id => todo_id)
+    #Todo.where(id: todo_id).each do  |q|
+    #  q.update(completed: true)
+    #end
+    #todo = Todo.where(:id => todo_id)
+
+    todo = Todo.find(todo_id).update(completed: true)
   end
 end
