@@ -49,6 +49,7 @@ class Todo < ActiveRecord::Base
     #end
     #todo = Todo.where(:id => todo_id)
 
-    todo = Todo.find(todo_id).update(completed: true)
+    Todo.update(todo_id, completed: true)
+
   end
 end
